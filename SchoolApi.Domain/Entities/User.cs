@@ -8,5 +8,15 @@ namespace SchoolApi.Domain.Entities
 {
     public class User
     {
+        public string id { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public string email { get; set; }
+        public string role { get; set; }
+
+        public UserProfile userProfile { get; set; }
+        public List<SchoolClass> schoolClasses { get; set; }
+        public List<ScheduleAggregation> scheduleAggregations { get; set; }
+
     }
 }
