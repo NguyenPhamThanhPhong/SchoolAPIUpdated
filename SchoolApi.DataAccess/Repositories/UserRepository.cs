@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SchoolApi.DataAccess.Repositories
 {
-    internal class UserRepository
+    public class UserRepository
     {
     }
 }

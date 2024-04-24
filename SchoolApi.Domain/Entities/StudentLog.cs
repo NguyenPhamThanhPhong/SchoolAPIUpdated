@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SchoolApi.Domain.Entities
 {
-    public class ScheduleAggregation
+    public class StudentLog
     {
+
     }
 }

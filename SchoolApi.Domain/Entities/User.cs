@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchoolApi.Domain.Entities
 {
+#pragma warning disable CS8618
     public class User
     {
         public string id { get; set; }
@@ -15,8 +16,9 @@ namespace SchoolApi.Domain.Entities
         public DateTime createdAt { get; set; }
 
         public UserProfile userProfile { get; set; }
-        public List<SchoolClass> schoolClasses { get; set; }
-        public List<ScheduleAggregation> scheduleAggregations { get; set; }
+        public List<SchoolClass> classes { get; set; }
+        public List<Schedule> scheduleAggregations { get; set; }
+        public List<Credit>? credits { get; set; }
 
     }
 }
