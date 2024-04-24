@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SchoolApi.Domain.Entities.StudentSchoolClass;
 
-namespace SchoolApi.Domain.Entities
+namespace SchoolApi.Domain.Entities.UserGroups
 {
 #pragma warning disable CS8618
     public class User
@@ -16,9 +17,8 @@ namespace SchoolApi.Domain.Entities
         public DateTime createdAt { get; set; }
 
         public UserProfile userProfile { get; set; }
-        public List<SchoolClass> classes { get; set; }
-        public List<Schedule> scheduleAggregations { get; set; }
-        public List<Credit>? credits { get; set; }
-
+        public virtual SchoolmemberLog lecturer { get; set; }
+        public virtual List<SchoolmemberLog> studentLogs { get; set; }
+        public virtual List<ScheduleTable> scheduleTables { get; set; }
     }
 }

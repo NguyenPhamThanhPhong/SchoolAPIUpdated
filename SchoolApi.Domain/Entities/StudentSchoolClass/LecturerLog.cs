@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.Domain.Entities
+namespace SchoolApi.Domain.Entities.StudentSchoolClass
 {
-    public class StudentLog
+    public class LecturerLog : SchoolmemberLog
     {
-
     }
 }

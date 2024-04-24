@@ -19,6 +19,7 @@ namespace SchoolApi.Domain.Entities
 
 
         public Faculty faculty { get; set; }
+        public User user { get; set; }
 
     }
 }

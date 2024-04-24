@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.Domain.Entities
+namespace SchoolApi.Domain.Entities.StudentSchoolClass
 {
 #pragma warning disable CS8618
-    public class Credit
+    public class CreditLog
     {
         public string id { get; set; }
         public float progress { get; set; }
@@ -16,7 +16,7 @@ namespace SchoolApi.Domain.Entities
         public float final { get; set; }
         public float average { get; set; }
 
-        public Subject subject { get; set; }
-        public Semester semester { get; set; }
+        public User user { get; set; }
+        public SchoolClass schoolClass { get; set; }
     }
 }
