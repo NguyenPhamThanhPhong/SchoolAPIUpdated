@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.Domain.Entities
+namespace SchoolApi.DataAccess.Configurations
 {
-    public class SchoolClass
+    internal class SMTPConfigs
     {
-
     }
 }

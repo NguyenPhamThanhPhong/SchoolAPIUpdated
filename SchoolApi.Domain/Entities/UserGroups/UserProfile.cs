@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SchoolApi.Domain.Entities.InformationTypeGroups;
 
-namespace SchoolApi.Domain.Entities
+namespace SchoolApi.Domain.Entities.UserGroups
 {
     public class UserProfile
     {
-        public string id { get; set; }
+        [Key]
+        public string userId { get; set; }
         public string name { get; set; }
         public string avatarUrl { get; set; }
         public DateTime dateOfBirth { get; set; }
@@ -16,10 +19,5 @@ namespace SchoolApi.Domain.Entities
         public string gender { get; set; }
         public string phone { get; set; }
         public string program { get; set; }
-
-
-        public Faculty faculty { get; set; }
-        public User user { get; set; }
-
     }
 }

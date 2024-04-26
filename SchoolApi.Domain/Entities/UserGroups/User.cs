@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SchoolApi.Domain.Entities.SchoolClassGroups;
 using SchoolApi.Domain.Entities.StudentSchoolClass;
 
 namespace SchoolApi.Domain.Entities.UserGroups
@@ -13,12 +16,13 @@ namespace SchoolApi.Domain.Entities.UserGroups
         public string id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
+
         public string role { get; set; }
         public DateTime createdAt { get; set; }
 
+        [Required]
         public UserProfile userProfile { get; set; }
-        public virtual SchoolmemberLog lecturer { get; set; }
-        public virtual List<SchoolmemberLog> studentLogs { get; set; }
         public virtual List<ScheduleTable> scheduleTables { get; set; }
+
     }
 }

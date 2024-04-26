@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace SchoolApi.Domain.Entities.UserGroups
 {
-    public class Student
+    public class Student : User
     {
-        public virtual List<CreditLog> credits { get; set; }
+        public virtual List<CreditLog> creditLogs { get; set; }
+        public virtual List<StudentLog> studentLogs { get; set; }
 
     }
 }

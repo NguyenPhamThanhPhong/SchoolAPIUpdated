@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolApi.Domain", "SchoolApi.Domain\SchoolApi.Domain.csproj", "{948275FC-4160-45BF-AE47-B5884CCEDE8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolApi.Domain", "SchoolApi.Domain\SchoolApi.Domain.csproj", "{948275FC-4160-45BF-AE47-B5884CCEDE8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolApi.DataAccess", "SchoolApi.DataAccess\SchoolApi.DataAccess.csproj", "{1D18AD60-C062-444D-B73C-7CAB09BBB1C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolApi.DataAccess", "SchoolApi.DataAccess\SchoolApi.DataAccess.csproj", "{1D18AD60-C062-444D-B73C-7CAB09BBB1C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolApi.API", "SchoolApi.API\SchoolApi.API.csproj", "{D4DE0466-004B-4CEE-A816-C5EF9FEBC058}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1D18AD60-C062-444D-B73C-7CAB09BBB1C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D18AD60-C062-444D-B73C-7CAB09BBB1C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D18AD60-C062-444D-B73C-7CAB09BBB1C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4DE0466-004B-4CEE-A816-C5EF9FEBC058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4DE0466-004B-4CEE-A816-C5EF9FEBC058}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4DE0466-004B-4CEE-A816-C5EF9FEBC058}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4DE0466-004B-4CEE-A816-C5EF9FEBC058}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
