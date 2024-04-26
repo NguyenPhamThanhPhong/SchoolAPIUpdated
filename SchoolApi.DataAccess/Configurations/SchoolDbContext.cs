@@ -43,6 +43,10 @@ namespace SchoolApi.DataAccess.Configurations
 
             try
             {
+                modelBuilder.Entity<User>()
+                    .HasDiscriminator(u => u.role)
+                    .HasValue<Student>("student")
+                    .HasValue<Lecturer>("lecturer");
 
                 modelBuilder.Entity<SchoolClass>()
                     .HasOne(s => s.schedule)

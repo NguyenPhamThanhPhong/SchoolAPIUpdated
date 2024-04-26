@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace SchoolApi.Domain.Entities.SchoolClassGroups
     public class Schedule
     {
 #pragma warning disable CS8618
-        public string id { get; set; }
+        [Key]
         public string schoolClassId { get; set; }
         public string room { get; set; }
         public string description { get; set; }

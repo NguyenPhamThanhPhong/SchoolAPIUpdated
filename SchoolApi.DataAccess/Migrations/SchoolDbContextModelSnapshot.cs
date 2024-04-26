@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolApi.DataAccess.Configurations;
 
-
 #nullable disable
 
 namespace SchoolApi.DataAccess.Migrations
@@ -155,7 +154,7 @@ namespace SchoolApi.DataAccess.Migrations
 
             modelBuilder.Entity("SchoolApi.Domain.Entities.SchoolClassGroups.Schedule", b =>
                 {
-                    b.Property<string>("id")
+                    b.Property<string>("schoolClassId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("dayOfWeek")
@@ -175,19 +174,12 @@ namespace SchoolApi.DataAccess.Migrations
                     b.Property<string>("scheduleTableid")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("schoolClassId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<TimeSpan>("start")
                         .HasColumnType("time");
 
-                    b.HasKey("id");
+                    b.HasKey("schoolClassId");
 
                     b.HasIndex("scheduleTableid");
-
-                    b.HasIndex("schoolClassId")
-                        .IsUnique();
 
                     b.ToTable("schedules");
                 });
@@ -294,6 +286,9 @@ namespace SchoolApi.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<float>("offset")
+                        .HasColumnType("real");
+
                     b.Property<string>("title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -366,11 +361,6 @@ namespace SchoolApi.DataAccess.Migrations
                     b.Property<string>("id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
 
@@ -380,7 +370,8 @@ namespace SchoolApi.DataAccess.Migrations
 
                     b.Property<string>("role")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("username")
                         .IsRequired()
@@ -390,7 +381,7 @@ namespace SchoolApi.DataAccess.Migrations
 
                     b.ToTable("users");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+                    b.HasDiscriminator<string>("role").HasValue("User");
 
                     b.UseTphMappingStrategy();
                 });
@@ -486,14 +477,14 @@ namespace SchoolApi.DataAccess.Migrations
                 {
                     b.HasBaseType("SchoolApi.Domain.Entities.UserGroups.User");
 
-                    b.HasDiscriminator().HasValue("Lecturer");
+                    b.HasDiscriminator().HasValue("lecturer");
                 });
 
             modelBuilder.Entity("SchoolApi.Domain.Entities.UserGroups.Student", b =>
                 {
                     b.HasBaseType("SchoolApi.Domain.Entities.UserGroups.User");
 
-                    b.HasDiscriminator().HasValue("Student");
+                    b.HasDiscriminator().HasValue("student");
                 });
 
             modelBuilder.Entity("FacultyPost", b =>

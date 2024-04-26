@@ -72,9 +72,8 @@ namespace SchoolApi.DataAccess.Migrations
                     id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    role = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false)
+                    role = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -333,7 +332,6 @@ namespace SchoolApi.DataAccess.Migrations
                 name: "schedules",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     schoolClassId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     room = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -344,7 +342,7 @@ namespace SchoolApi.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_schedules", x => x.id);
+                    table.PrimaryKey("PK_schedules", x => x.schoolClassId);
                     table.ForeignKey(
                         name: "FK_schedules_scheduleTables_scheduleTableid",
                         column: x => x.scheduleTableid,
@@ -363,6 +361,7 @@ namespace SchoolApi.DataAccess.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    offset = table.Column<float>(type: "real", nullable: false),
                     title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     fileUrlsString = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -448,12 +447,6 @@ namespace SchoolApi.DataAccess.Migrations
                 name: "IX_schedules_scheduleTableid",
                 table: "schedules",
                 column: "scheduleTableid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_schedules_schoolClassId",
-                table: "schedules",
-                column: "schoolClassId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_scheduleTables_semesterid",
