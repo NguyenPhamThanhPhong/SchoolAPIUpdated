@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SchoolApi.Domain.Entities.SchoolClassGroups;
-using SchoolApi.Domain.Entities.StudentSchoolClass;
+using SchoolApi.Infrastructure.Entities.SchoolClassGroups;
+using SchoolApi.Infrastructure.Entities.StudentSchoolClass;
 
-namespace SchoolApi.Domain.Entities.UserGroups
+namespace SchoolApi.Infrastructure.Entities.UserGroups
 {
 #pragma warning disable CS8618
     public class User

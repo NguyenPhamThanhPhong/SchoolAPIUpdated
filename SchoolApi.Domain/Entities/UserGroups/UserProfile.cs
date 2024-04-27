@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SchoolApi.Domain.Entities.InformationTypeGroups;
+using SchoolApi.Infrastructure.Entities.InformationTypeGroups;
 
-namespace SchoolApi.Domain.Entities.UserGroups
+namespace SchoolApi.Infrastructure.Entities.UserGroups
 {
     public class UserProfile
     {

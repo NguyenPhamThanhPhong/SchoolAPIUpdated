@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.Domain.Services.AzureBlobServices
+namespace SchoolApi.Infrastructure.Services.SMTPServices
 {
-    public class AzureBlobHandler
+    public class EmailUtil
     {
     }
 }

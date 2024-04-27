@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SchoolApi.Domain.Entities.InformationTypeGroups;
-using SchoolApi.Domain.Entities.SchoolClassGroups;
-using SchoolApi.Domain.Entities.StudentSchoolClass;
-using SchoolApi.Domain.Entities.UserGroups;
+using SchoolApi.Infrastructure.Entities.InformationTypeGroups;
+using SchoolApi.Infrastructure.Entities.SchoolClassGroups;
+using SchoolApi.Infrastructure.Entities.StudentSchoolClass;
+using SchoolApi.Infrastructure.Entities.UserGroups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.DataAccess.DbContexts
+namespace SchoolApi.Infrastructure.Configurations
 {
 
     public class SchoolDbContext : DbContext
@@ -43,6 +43,8 @@ namespace SchoolApi.DataAccess.DbContexts
 
             try
             {
+
+
                 modelBuilder.Entity<User>()
                     .HasDiscriminator(u => u.role)
                     .HasValue<Student>("student")
@@ -52,6 +54,7 @@ namespace SchoolApi.DataAccess.DbContexts
                     .HasOne(s => s.schedule)
                     .WithOne(s => s.schoolClass)
                     .HasForeignKey<Schedule>(s => s.schoolClassId);
+
 
                 modelBuilder.Entity<SchoolClass>()
                     .HasMany(s => s.studentLogs)
@@ -97,6 +100,12 @@ namespace SchoolApi.DataAccess.DbContexts
 
                 modelBuilder.Entity<StudentLog>().HasBaseType<SchoolmemberLog>().ToTable("StudentLogs");
                 modelBuilder.Entity<LecturerLog>().HasBaseType<SchoolmemberLog>().ToTable("LecturerLogs");
+                var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+        .SelectMany(t => t.GetForeignKeys())
+        .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
+
+                foreach (var fk in cascadeFKs)
+                    fk.DeleteBehavior = DeleteBehavior.Restrict;
             }
             catch (Exception e)
             {

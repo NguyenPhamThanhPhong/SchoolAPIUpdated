@@ -1,13 +1,13 @@
-﻿using SchoolApi.DataAccess.DbContexts;
-using SchoolApi.DataAccess.Repositories.Base;
-using SchoolApi.Domain.Entities.UserGroups;
+﻿using SchoolApi.Infrastructure.Configurations;
+using SchoolApi.Infrastructure.Repositories.Base;
+using SchoolApi.Infrastructure.Entities.UserGroups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.DataAccess.Repositories.UserGroups
+namespace SchoolApi.Infrastructure.Repositories.UserGroups
 {
     public interface IStudentRepository : IBaseRepository<Student>
     {

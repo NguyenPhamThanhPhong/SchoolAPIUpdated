@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SchoolApi.Domain.Entities.SchoolClassGroups;
-using SchoolApi.Domain.Entities.UserGroups;
+using SchoolApi.Infrastructure.Entities.SchoolClassGroups;
+using SchoolApi.Infrastructure.Entities.UserGroups;
 
-namespace SchoolApi.Domain.Entities.StudentSchoolClass
+namespace SchoolApi.Infrastructure.Entities.StudentSchoolClass
 {
     public abstract class SchoolmemberLog
     {

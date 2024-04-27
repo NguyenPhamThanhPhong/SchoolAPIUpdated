@@ -1,17 +1,20 @@
-﻿using SchoolApi.DataAccess.DbContexts;
-using SchoolApi.DataAccess.Repositories.InformationTypeGroups;
-using SchoolApi.DataAccess.Repositories.UserGroups;
+﻿using SchoolApi.Infrastructure.Configurations;
+using SchoolApi.Infrastructure.Repositories.InformationTypeGroups;
+using SchoolApi.Infrastructure.Repositories.UserGroups;
 
 
-namespace SchoolApi.DataAccess.Repositories.Base
+namespace SchoolApi.Infrastructure.Repositories.Base
 {
+
     public class UnitOfWork : IDisposable
     {
         private readonly SchoolDbContext _context;
+#pragma warning disable CS8618
         public UnitOfWork(SchoolDbContext context)
         {
             _context = context;
         }
+#pragma warning restore CS8618
 
         private IFacultyRepository  _facultyRepository  ;
         private IPostRepository     _postRepository     ;

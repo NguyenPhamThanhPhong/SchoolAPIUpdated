@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace SchoolApi.Domain.Entities.SchoolClassGroups
+namespace SchoolApi.Infrastructure.Entities.SchoolClassGroups
 {
     public class SchoolClassSection
     {
@@ -15,6 +15,8 @@ namespace SchoolApi.Domain.Entities.SchoolClassGroups
         public string title { get; set; }
         public string content { get; set; }
         public string fileUrlsString { get; set; }
+        public bool isDeleted { get; set; }
+
         [NotMapped]
         public Dictionary<string, string> fileUrlsDict
         {
@@ -26,6 +28,13 @@ namespace SchoolApi.Domain.Entities.SchoolClassGroups
                     Deserialize<Dictionary<string, string>>(fileUrlsString) ?? new Dictionary<string, string>();
             }
             set => fileUrlsString = JsonSerializer.Serialize(value);
+        }
+        public SchoolClassSection()
+        {
+            id= Guid.NewGuid().ToString();
+            offset= 0;
+            title = string.Empty;
+            content = string.Empty;
         }
 
     }

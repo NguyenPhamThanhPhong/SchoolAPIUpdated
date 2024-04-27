@@ -1,13 +1,15 @@
-﻿using SchoolApi.Domain.Entities.InformationTypeGroups;
-using SchoolApi.Domain.Entities.StudentSchoolClass;
+﻿using SchoolApi.Infrastructure.Entities.InformationTypeGroups;
+using SchoolApi.Infrastructure.Entities.StudentSchoolClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.Domain.Entities.SchoolClassGroups
+namespace SchoolApi.Infrastructure.Entities.SchoolClassGroups
 {
+#pragma warning disable CS8618
+
     public class SchoolClass
     {
         public string id { get; set; }
@@ -15,6 +17,9 @@ namespace SchoolApi.Domain.Entities.SchoolClassGroups
         public string roomName { get; set; }
         public string program { get; set; }
         public string classType { get; set; }
+        public int studentCount { get; set; }
+        public int studentMax { get; set; }
+        public bool isDeleted { get; set; }
 
         public virtual Semester semester { get; set; }
         public virtual Subject subject { get; set; }

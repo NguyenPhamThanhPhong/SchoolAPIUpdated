@@ -1,12 +1,12 @@
-﻿using SchoolApi.DataAccess.DbContexts;
-using SchoolApi.DataAccess.Repositories.Base;
+﻿using SchoolApi.Infrastructure.Configurations;
+using SchoolApi.Infrastructure.Repositories.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.DataAccess.Repositories.SchoolClassGroups
+namespace SchoolApi.Infrastructure.Repositories.SchoolClassGroups
 {
     public interface ISchoolClassRepository : IBaseRepository<SchoolClassRepository>
     {

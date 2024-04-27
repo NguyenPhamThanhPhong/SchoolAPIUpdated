@@ -1,11 +1,11 @@
-﻿using SchoolApi.Domain.Entities.UserGroups;
+﻿using SchoolApi.Infrastructure.Entities.UserGroups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.Domain.Entities.StudentSchoolClass
+namespace SchoolApi.Infrastructure.Entities.StudentSchoolClass
 {
     public class LecturerLog : SchoolmemberLog
     {

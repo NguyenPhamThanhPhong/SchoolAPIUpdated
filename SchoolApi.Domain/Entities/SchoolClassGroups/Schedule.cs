@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.Domain.Entities.SchoolClassGroups
+namespace SchoolApi.Infrastructure.Entities.SchoolClassGroups
 {
     public class Schedule
     {
@@ -17,9 +17,14 @@ namespace SchoolApi.Domain.Entities.SchoolClassGroups
         public DayOfWeek dayOfWeek { get; set; }
         public TimeSpan start { get; set; }
         public TimeSpan end { get; set; }
+        public bool isDeleted { get; set; }
 
         public virtual ScheduleTable scheduleTable { get; set; }
         public virtual SchoolClass schoolClass { get; set; }
+        public Schedule()
+        {
+            
+        }
     }
     public enum DayOfWeek
     {
@@ -32,4 +37,3 @@ namespace SchoolApi.Domain.Entities.SchoolClassGroups
         Sunday
     }
 }
-

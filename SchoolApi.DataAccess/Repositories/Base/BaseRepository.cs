@@ -1,4 +1,4 @@
-﻿using SchoolApi.DataAccess.DbContexts;
+﻿using SchoolApi.Infrastructure.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.DataAccess.Repositories.Base
+namespace SchoolApi.Infrastructure.Repositories.Base
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {

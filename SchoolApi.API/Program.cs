@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolApi.API;
-using SchoolApi.DataAccess.DbContexts;
+using SchoolApi.Infrastructure.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.Domain.Services.AuthenticationServices
+namespace SchoolApi.Infrastructure.Services.AuthenticationServices
 {
     public class TokenGenerator
     {

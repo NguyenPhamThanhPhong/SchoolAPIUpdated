@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SchoolApi.DataAccess\SchoolApi.DataAccess.csproj" />
+    <ProjectReference Include="..\SchoolApi.Infrastructure\SchoolApi.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

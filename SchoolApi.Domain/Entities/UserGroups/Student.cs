@@ -1,11 +1,11 @@
-﻿using SchoolApi.Domain.Entities.StudentSchoolClass;
+﻿using SchoolApi.Infrastructure.Entities.StudentSchoolClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.Domain.Entities.UserGroups
+namespace SchoolApi.Infrastructure.Entities.UserGroups
 {
     public class Student : User
     {

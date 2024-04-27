@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
 
-namespace SchoolApi.Domain.Entities.InformationTypeGroups
+namespace SchoolApi.Infrastructure.Entities.InformationTypeGroups
 {
 #pragma warning disable CS8618
     public class Post
@@ -16,6 +16,7 @@ namespace SchoolApi.Domain.Entities.InformationTypeGroups
         public string title { get; set; }
         public string content { get; set; }
         public string fileUrlsString { get; set; }
+        public bool isDeleted { get; set; }
         [NotMapped]
         public Dictionary<string, string> fileUrlsDict
         {
@@ -31,6 +32,13 @@ namespace SchoolApi.Domain.Entities.InformationTypeGroups
 
         //navigation here 
         public List<Faculty>? faculties { get; set; }
+        public Post()
+        {
+            id = Guid.NewGuid().ToString();
+            createdAt = DateTime.Now;
+            title = string.Empty;
+            content = string.Empty;
+        }
 
     }
 }

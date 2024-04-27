@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.DataAccess.DbContexts
+namespace SchoolApi.Infrastructure.Configurations
 {
+#pragma warning disable CS8618
     public class SMTPConfigs
     {
         public string SMTPServer { get; set; }

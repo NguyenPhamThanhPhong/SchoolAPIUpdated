@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SchoolApi.API.Helper;
-using SchoolApi.DataAccess.DbContexts;
-using SchoolApi.DataAccess.Repositories.Base;
-using SchoolApi.Domain.Services.AuthenticationServices;
-using SchoolApi.Domain.Services.AzureBlobServices;
-using SchoolApi.Domain.Services.SMTPServices;
+using SchoolApi.Infrastructure.Configurations;
+using SchoolApi.Infrastructure.Repositories.Base;
+using SchoolApi.Infrastructure.Services.AuthenticationServices;
+using SchoolApi.Infrastructure.Services.AzureBlobServices;
+using SchoolApi.Infrastructure.Services.BusinessServices;
+using SchoolApi.Infrastructure.Services.SMTPServices;
 using System.Text;
 
 namespace SchoolApi.API
@@ -152,7 +153,7 @@ namespace SchoolApi.API
         }
         public static IServiceCollection ConfigBusinessServices(this IServiceCollection services)
         {
-            //services.AddSingleton
+            services.AddTransient<ISemesterService, SemesterService>();
             return services;
         }
     }
