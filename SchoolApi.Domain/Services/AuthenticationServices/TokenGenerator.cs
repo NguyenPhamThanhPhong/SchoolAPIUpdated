@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.DataAccess.Configurations
+namespace SchoolApi.Domain.Services.AuthenticationServices
 {
-    internal class SMTPConfigs
+    public class TokenGenerator
     {
     }
 }

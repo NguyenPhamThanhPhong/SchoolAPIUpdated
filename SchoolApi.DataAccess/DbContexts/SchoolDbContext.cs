@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolApi.DataAccess.Configurations
+namespace SchoolApi.DataAccess.DbContexts
 {
 
     public class SchoolDbContext : DbContext

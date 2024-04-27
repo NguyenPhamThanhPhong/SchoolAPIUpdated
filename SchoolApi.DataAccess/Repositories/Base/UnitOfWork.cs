@@ -1,4 +1,4 @@
-﻿using SchoolApi.DataAccess.Configurations;
+﻿using SchoolApi.DataAccess.DbContexts;
 using SchoolApi.DataAccess.Repositories.InformationTypeGroups;
 using SchoolApi.DataAccess.Repositories.UserGroups;
 

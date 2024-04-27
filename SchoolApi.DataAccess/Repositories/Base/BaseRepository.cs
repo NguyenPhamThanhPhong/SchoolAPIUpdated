@@ -1,4 +1,4 @@
-﻿using SchoolApi.DataAccess.Configurations;
+﻿using SchoolApi.DataAccess.DbContexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
