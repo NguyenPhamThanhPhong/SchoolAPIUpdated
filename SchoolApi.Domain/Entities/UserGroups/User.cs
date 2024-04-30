@@ -5,13 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SchoolApi.Domain.Entities;
 using SchoolApi.Infrastructure.Entities.SchoolClassGroups;
 using SchoolApi.Infrastructure.Entities.StudentSchoolClass;
 
 namespace SchoolApi.Infrastructure.Entities.UserGroups
 {
 #pragma warning disable CS8618
-    public class User
+    public class User : Entity
     {
         public string id { get; set; }
         public string username { get; set; }

@@ -5,12 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SchoolApi.Domain.Entities;
 using SchoolApi.Infrastructure.Entities.SchoolClassGroups;
 using SchoolApi.Infrastructure.Entities.UserGroups;
 
 namespace SchoolApi.Infrastructure.Entities.StudentSchoolClass
 {
-    public abstract class SchoolmemberLog
+    public abstract class SchoolmemberLog : Entity
     {
         [Key]
         [Column(Order =1)]

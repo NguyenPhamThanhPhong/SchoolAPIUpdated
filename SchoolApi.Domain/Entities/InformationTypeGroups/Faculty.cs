@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SchoolApi.Domain.Entities;
 
 namespace SchoolApi.Infrastructure.Entities.InformationTypeGroups
 {
 #pragma warning disable CS8618
-    public class Faculty
+    public class Faculty : Entity
     {
         public string id { get; set; }
         public string name { get; set; }
         public DateTime createdAt { get; set; }
-        public bool isDeleted { get; set; }
+
+        public override bool hasOwnerShip()
+            => posts.Any() && subjects.Any();
 
 
         public List<Subject> subjects { get; set; }

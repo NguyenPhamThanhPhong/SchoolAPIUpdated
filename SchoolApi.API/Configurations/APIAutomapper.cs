@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using SchoolApi.API.DTOS;
+using SchoolApi.API.DTOS.Semester;
 using SchoolApi.Infrastructure.Entities.InformationTypeGroups;
-using SchoolApi.Infrastructure.ServiceDTOS.Semester;
+using SchoolApi.Infrastructure.ServiceDTOS.SemesterServiceDTOs;
 
 namespace SchoolApi.API.Configurations
 {

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SchoolApi.API.DTOS;
-using SchoolApi.Infrastructure.ServiceDTOS.Semester;
+using SchoolApi.API.DTOS.Semester;
+using SchoolApi.Infrastructure.ServiceDTOS.SemesterServiceDTOs;
 using SchoolApi.Infrastructure.Services.BusinessServices;
 
 namespace SchoolApi.API.Controllers
@@ -18,23 +18,39 @@ namespace SchoolApi.API.Controllers
             _semesterService = semesterService;
             _mapper = mapper;
         }
-        [HttpPost("")]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateSemester(SemesterCreateRequest request)
         {
             var serviceRequest = _mapper.Map<SemesterCreateServiceRequest>(request);
-            var semester = await _semesterService.CreateSemester(serviceRequest);
+            var semester = await _semesterService.CreateSingleSemester(serviceRequest);
             return Ok(semester);
         }
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSemesterDetail(string id)
+        [HttpPost("create-multiple")]
+        public async Task<IActionResult> CreateSemesters(IEnumerable<SemesterCreateRequest> request)
+        {
+            var serviceRequest = _mapper.Map<IEnumerable<SemesterCreateServiceRequest>>(request);
+            var semester = await _semesterService.CreateMultipleSemesters(serviceRequest);
+            return Ok(semester);
+        }
+        [HttpGet("{semesterId}")]
+        public async Task<IActionResult> GetSemesterDetail(string semesterId)
         {
             throw new NotImplementedException();
         }
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSemester(string id)
+        [HttpGet("multiple/{page}")]
+        public async Task<IActionResult> GetSemesters(int page)
         {
             throw new NotImplementedException();
-
+        }
+        [HttpDelete("{semesterId}")]
+        public async Task<IActionResult> DeleteSemester(string semesterId)
+        {
+            throw new NotImplementedException();
+        }
+        [HttpPost("search")]
+        public async Task<IActionResult> SearchSemester(string searchTerm)
+        {
+            throw new NotImplementedException();
         }
     }
 }

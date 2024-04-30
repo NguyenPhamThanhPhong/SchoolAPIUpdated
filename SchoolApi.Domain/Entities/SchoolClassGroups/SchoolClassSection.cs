@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchoolApi.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -8,14 +9,13 @@ using System.Threading.Tasks;
 
 namespace SchoolApi.Infrastructure.Entities.SchoolClassGroups
 {
-    public class SchoolClassSection
+    public class SchoolClassSection : Entity
     {
         public string id { get; set; }
         public float offset { get; set;}
         public string title { get; set; }
         public string content { get; set; }
         public string fileUrlsString { get; set; }
-        public bool isDeleted { get; set; }
 
         [NotMapped]
         public Dictionary<string, string> fileUrlsDict

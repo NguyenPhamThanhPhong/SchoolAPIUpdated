@@ -20,6 +20,28 @@ namespace SchoolApi.Infrastructure.Repositories.InformationTypeGroups
         {
 
         }
+        public Task RemoveRangeFromIds(IEnumerable<string> ids)
+        {
+            // use sql CASE to check if is Ownership of something
+            // if yes, set isDeleted to true
+            //else remove
+            // help me code here copilot
+            var faculties = _context.Set<Faculty>()
+                .Where(x => ids.Contains(x.id))
+                .Select(x => new
+                {
+                    faculty = x,
+                    hasOwnerShip= x.hasOwnerShip()
+                }).ToList();
+            foreach (var faculty in faculties)
+            {
+                if (faculty.hasOwnerShip)
+                    faculty.faculty.isDeleted = true;
+                else
+                    _context.Set<Faculty>().Remove(faculty.faculty);
+
+            }
+        }
 
         public Task<IEnumerable<Faculty>> GetRangeRelatedSubject(string facultyId)
         {

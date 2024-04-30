@@ -31,7 +31,10 @@ namespace SchoolApi.Infrastructure.Repositories.Base
         public IEnumerable<TEntity> GetRange(Expression<Func<TEntity, bool>> predicate, 
             int page=0, int pageSize = 10)
         {
-            return _context.Set<TEntity>().Where(predicate)
+            if(page==-1)
+                return _context.Set<TEntity>().Where(predicate);
+            else
+                return _context.Set<TEntity>().Where(predicate)
                 .Skip(page * pageSize)
                 .Take(pageSize);
         }

@@ -1,4 +1,5 @@
-﻿using SchoolApi.Infrastructure.Entities.InformationTypeGroups;
+﻿using SchoolApi.Domain.Entities;
+using SchoolApi.Infrastructure.Entities.InformationTypeGroups;
 using SchoolApi.Infrastructure.Entities.StudentSchoolClass;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace SchoolApi.Infrastructure.Entities.SchoolClassGroups
 {
 #pragma warning disable CS8618
 
-    public class SchoolClass
+    public class SchoolClass : Entity
     {
         public string id { get; set; }
         public string name { get; set; }
@@ -19,7 +20,6 @@ namespace SchoolApi.Infrastructure.Entities.SchoolClassGroups
         public string classType { get; set; }
         public int studentCount { get; set; }
         public int studentMax { get; set; }
-        public bool isDeleted { get; set; }
 
         public virtual Semester semester { get; set; }
         public virtual Subject subject { get; set; }
@@ -29,5 +29,8 @@ namespace SchoolApi.Infrastructure.Entities.SchoolClassGroups
         public virtual List<CreditLog> creditLogs { get; set; }
         public virtual List<Exam> exams { get; set; }
         public virtual List<SchoolClassSection> sections { get; set; }
+
+        public override bool hasOwnerShip() => creditLogs.Any();
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchoolApi.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SchoolApi.Infrastructure.Entities.SchoolClassGroups
 {
-    public class Schedule
+    public class Schedule : Entity
     {
 #pragma warning disable CS8618
         [Key]
@@ -17,10 +18,14 @@ namespace SchoolApi.Infrastructure.Entities.SchoolClassGroups
         public DayOfWeek dayOfWeek { get; set; }
         public TimeSpan start { get; set; }
         public TimeSpan end { get; set; }
-        public bool isDeleted { get; set; }
 
-        public virtual ScheduleTable scheduleTable { get; set; }
         public virtual SchoolClass schoolClass { get; set; }
+
+        public override bool hasOwnerShip()
+        {
+            return schoolClass != null;
+        }
+
         public Schedule()
         {
             

@@ -1,4 +1,4 @@
-﻿namespace SchoolApi.API.DTOS
+﻿namespace SchoolApi.API.DTOS.Semester
 {
 #pragma warning disable CS8618
     public class SemesterCreateRequest

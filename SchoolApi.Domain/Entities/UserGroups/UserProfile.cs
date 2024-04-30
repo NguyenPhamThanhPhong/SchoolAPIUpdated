@@ -8,6 +8,7 @@ using SchoolApi.Infrastructure.Entities.InformationTypeGroups;
 
 namespace SchoolApi.Infrastructure.Entities.UserGroups
 {
+#pragma warning disable CS8618
     public class UserProfile
     {
         [Key]
