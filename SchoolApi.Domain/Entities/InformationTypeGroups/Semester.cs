@@ -3,6 +3,7 @@ using SchoolApi.Infrastructure.Entities.SchoolClassGroups;
 
 namespace SchoolApi.Infrastructure.Entities.InformationTypeGroups
 {
+#pragma warning disable CS8618
     public class Semester : Entity
     {
         public string id { get; set; }
@@ -10,11 +11,6 @@ namespace SchoolApi.Infrastructure.Entities.InformationTypeGroups
         public DateTime startTime { get; set; }
         public DateTime endTime { get; set; }
 
-
-        public override bool hasOwnerShip()
-        {
-            return schoolClasses.Any();
-        }
 
         public virtual List<SchoolClass> schoolClasses { get; set; }
         public virtual List<ScheduleTable> scheduleTables { get; set; }

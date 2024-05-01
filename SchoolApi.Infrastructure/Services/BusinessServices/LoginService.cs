@@ -12,7 +12,16 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
         public Task<LoginServiceResponse> Login(LoginServiceRequest request);
         public Task<string> RefreshToken(string refreshToken);
     }
-    public class LoginService
+    public class LoginService : ILoginService
     {
+        public Task<LoginServiceResponse> Login(LoginServiceRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> RefreshToken(string refreshToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

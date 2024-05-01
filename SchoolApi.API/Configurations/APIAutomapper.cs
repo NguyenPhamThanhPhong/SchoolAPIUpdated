@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using SchoolApi.API.DTOS.Faculty;
 using SchoolApi.API.DTOS.Semester;
 using SchoolApi.Infrastructure.Entities.InformationTypeGroups;
+using SchoolApi.Infrastructure.ServiceDTOS.FacultyServiceDTOs;
 using SchoolApi.Infrastructure.ServiceDTOS.SemesterServiceDTOs;
 
 namespace SchoolApi.API.Configurations
@@ -12,6 +14,11 @@ namespace SchoolApi.API.Configurations
             CreateMap<SemesterCreateRequest, SemesterCreateServiceRequest>();
             CreateMap<SemesterCreateServiceRequest, Semester>()
                 .ForMember(dest => dest.id, opt => Guid.NewGuid().ToString());
+
+            CreateMap<FacultyCreateRequest, FacultyCreateServiceRequest>();
+            CreateMap<FacultyCreateServiceRequest, Faculty>();
+            CreateMap<FacultyUpdateRequest, FacultyUpdateServiceRequest>();
+            CreateMap<FacultyUpdateServiceRequest, Faculty>();
         }
     }
 }

@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
-using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SchoolApi.Infrastructure.Entities.InformationTypeGroups;
 using SchoolApi.Infrastructure.Repositories.Base;
 using SchoolApi.Infrastructure.ServiceDTOS;
 using SchoolApi.Infrastructure.ServiceDTOS.FacultyServiceDTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace SchoolApi.Infrastructure.Services.BusinessServices
 {
@@ -16,12 +14,12 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
     {
         public Task<Faculty> CreateSingleFaculty(FacultyCreateServiceRequest request);
         public Task<MultipleEntitiesResponse<Faculty>> CreateMultipleFaculties(IEnumerable<FacultyCreateServiceRequest> requests);
-        public Task<Faculty> GetFacultyDetail(string facultyId);
+        public Task<Faculty?> GetFacultyDetail(string facultyId);
         public Task<MultipleEntitiesResponse<Faculty>> GetMultipleFaculties(int page);
         public Task<bool> DeleteSingleFaculty(string facultyId);
         public Task<bool> DeleteMultipleFaculties(IEnumerable<string> facultyIds);
         public Task<MultipleEntitiesResponse<Faculty>> SearchFaculty(string searchTerm);
-        public Task<Faculty> UpdateFaculty(FacultyUpdateServiceRequest request);
+        public Task<Faculty?> UpdateFaculty(FacultyUpdateServiceRequest request);
     }
     public class FacultyService : IFacultyService
     {
@@ -42,7 +40,6 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
             var result = new MultipleEntitiesResponse<Faculty>() { datas = faculties };
             return Task.FromResult(result);
         }
-
         public Task<Faculty> CreateSingleFaculty(FacultyCreateServiceRequest request)
         {
             var faculty = _mapper.Map<Faculty>(request);
@@ -50,47 +47,68 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
             _unitofWork.Save();
             return Task.FromResult(faculty);
         }
-
         public Task<bool> DeleteMultipleFaculties(IEnumerable<string> facultyIds)
         {
-            var faculties = _unitofWork.facultyRepository.GetRange(
-                    predicate: s => facultyIds.Contains(s.id),
-                    page: -1, pageSize: -1);
             try
             {
-                _unitofWork.facultyRepository.RemoveRange(faculties);
+                _unitofWork.facultyRepository.RemoveRangeFromIds(facultyIds);
+                _unitofWork.Save();
+                return Task.FromResult(true);
             }
-            catch(SqlException ex)
+            catch
             {
-                //if exception is about remove entities with owner ship
-
+                return Task.FromResult(false);
             }
-
         }
 
         public Task<bool> DeleteSingleFaculty(string facultyId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _unitofWork.facultyRepository.RemoveSingleFromId(facultyId);
+                _unitofWork.Save();
+                return Task.FromResult(true);
+            }
+            catch
+            {
+                return Task.FromResult(false);
+            }
         }
 
-        public Task<Faculty> GetFacultyDetail(string facultyId)
+        public Task<Faculty?> GetFacultyDetail(string facultyId)
         {
-            throw new NotImplementedException();
+            var faculty =  _unitofWork.facultyRepository.GetDetailFromId(facultyId);
+            _unitofWork.Save();
+            return Task.FromResult(faculty);
         }
 
-        public Task<MultipleEntitiesResponse<Faculty>> GetMultipleFaculties(int page)
+        public  Task<MultipleEntitiesResponse<Faculty>> GetMultipleFaculties(int page)
         {
-            throw new NotImplementedException();
+            var faculties =  _unitofWork.facultyRepository.GetRange(s=>true).Skip(page * 10).Take(10);
+            var count = _unitofWork.facultyRepository.GetCountDefault();
+            return Task.FromResult(new MultipleEntitiesResponse<Faculty>() { datas = faculties, TotalCount = count });
         }
 
         public Task<MultipleEntitiesResponse<Faculty>> SearchFaculty(string searchTerm)
         {
-            throw new NotImplementedException();
+            var cleanSearchTerm = Regex.Replace(searchTerm, "[^a-zA-Z0-9]", "");
+            var faculties = _unitofWork.facultyRepository.GetRange(s => EF.Functions.Like(s.name.ToLower(), $"%{cleanSearchTerm}%"));
+            var count = faculties.Count();
+            faculties = faculties.Skip(0).Take(10);
+            return Task.FromResult(new MultipleEntitiesResponse<Faculty>() 
+                    { datas = faculties, TotalCount = count });
         }
-
-        public Task<Faculty> UpdateFaculty(FacultyUpdateServiceRequest request)
+        public Task<Faculty?> UpdateFaculty(FacultyUpdateServiceRequest request)
         {
-            throw new NotImplementedException();
+            var faculty = _unitofWork.facultyRepository.GetSingle(s => s.id == request.id);
+            if(faculty!=null)
+            {
+                _mapper.Map(request, faculty);
+                Console.WriteLine(JsonSerializer.Serialize(faculty));
+                _unitofWork.facultyRepository.Update(faculty);
+                _unitofWork.Save();
+            }
+            return Task.FromResult(faculty);
         }
     }
 }

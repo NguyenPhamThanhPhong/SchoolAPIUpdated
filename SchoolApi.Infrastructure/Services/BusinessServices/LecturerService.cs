@@ -22,7 +22,46 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
         public Task<MultipleEntitiesResponse<Lecturer>> SearchLecturer(string searchTerm);
         public Task<bool> UpdateLecturer(LecturerUpdateServiceRequest request);
     }
-    public class LecturerService
+    public class LecturerService : ILecturerService
     {
+        public Task<IEnumerable<Lecturer>> CreateMultipleLecturers(IEnumerable<LecturerCreateServiceRequest> requests)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Lecturer> CreateSingleLecturer(LecturerCreateServiceRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteMultipleLecturers(IEnumerable<string> lecturerIds)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteSingleLecturer(string lecturerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Lecturer> GetLecturerDetail(string lecturerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MultipleEntitiesResponse<Lecturer>> GetMultipleLecturers(int page)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MultipleEntitiesResponse<Lecturer>> SearchLecturer(string searchTerm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateLecturer(LecturerUpdateServiceRequest request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

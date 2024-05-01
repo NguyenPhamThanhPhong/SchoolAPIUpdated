@@ -9,6 +9,6 @@ namespace SchoolApi.Domain.Entities
     public class Entity
     {
         public bool isDeleted { get; set; }
-        public virtual bool hasOwnerShip() => false;
+        public DateTime createdAt { get; set; }
     }
 }

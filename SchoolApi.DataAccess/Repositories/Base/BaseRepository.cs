@@ -10,7 +10,7 @@ namespace SchoolApi.Infrastructure.Repositories.Base
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {
-        IEnumerable<TEntity> GetRange(Expression<Func<TEntity,bool>> predicate,int page,int pageSize);
+        IEnumerable<TEntity> GetRange(Expression<Func<TEntity,bool>> predicate);
         TEntity? GetSingle(Expression<Func<TEntity, bool>> predicate);
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);
@@ -18,6 +18,7 @@ namespace SchoolApi.Infrastructure.Repositories.Base
         void UpdateRange(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
+        int GetCountDefault();
     }
     public class BaseRepository<TEntity>: IBaseRepository<TEntity> where TEntity : class
     {
@@ -28,15 +29,10 @@ namespace SchoolApi.Infrastructure.Repositories.Base
             _context = context;
         }
 
-        public IEnumerable<TEntity> GetRange(Expression<Func<TEntity, bool>> predicate, 
-            int page=0, int pageSize = 10)
+        public IEnumerable<TEntity> GetRange(Expression<Func<TEntity, bool>> predicate)
         {
-            if(page==-1)
-                return _context.Set<TEntity>().Where(predicate);
-            else
-                return _context.Set<TEntity>().Where(predicate)
-                .Skip(page * pageSize)
-                .Take(pageSize);
+            return _context.Set<TEntity>().Where(predicate);
+
         }
         public TEntity? GetSingle(Expression<Func<TEntity, bool>> predicate)
         {
@@ -70,6 +66,11 @@ namespace SchoolApi.Infrastructure.Repositories.Base
         public void UpdateRange(IEnumerable<TEntity> entities)
         {
             _context.UpdateRange(entities);
+        }
+
+        public int GetCountDefault()
+        {
+            return _context.Set<TEntity>().Count();
         }
     }
 }

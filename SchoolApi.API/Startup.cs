@@ -154,6 +154,13 @@ namespace SchoolApi.API
         public static IServiceCollection ConfigBusinessServices(this IServiceCollection services)
         {
             services.AddTransient<ISemesterService, SemesterService>();
+            services.AddTransient<IFacultyService, FacultyService>();
+            services.AddTransient<ISubjectService, SubjectService>();
+            services.AddTransient<IPostService, PostService>();
+            services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<ILecturerService, LecturerService>();
+            services.AddTransient<ILoginService, LoginService>();
+            services.AddTransient<ISchoolClassService, SchoolClassService>();
             return services;
         }
     }

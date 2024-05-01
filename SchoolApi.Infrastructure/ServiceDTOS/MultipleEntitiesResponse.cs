@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchoolApi.Infrastructure.ServiceDTOS
 {
+#pragma warning disable CS8618
     public class MultipleEntitiesResponse<TEntity> where TEntity : class
     {
         public bool Success { get; set; }

@@ -21,11 +21,6 @@ namespace SchoolApi.Infrastructure.Entities.SchoolClassGroups
 
         public virtual SchoolClass schoolClass { get; set; }
 
-        public override bool hasOwnerShip()
-        {
-            return schoolClass != null;
-        }
-
         public Schedule()
         {
             

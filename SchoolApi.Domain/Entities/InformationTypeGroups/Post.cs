@@ -8,7 +8,6 @@ namespace SchoolApi.Infrastructure.Entities.InformationTypeGroups
     public class Post : Entity
     {
         public string id { get; set; }
-        public DateTime createdAt { get; set; }
         public string title { get; set; }
         public string content { get; set; }
         public string fileUrlsString { get; set; }
@@ -31,7 +30,6 @@ namespace SchoolApi.Infrastructure.Entities.InformationTypeGroups
         public Post()
         {
             id = Guid.NewGuid().ToString();
-            createdAt = DateTime.Now;
             title = string.Empty;
             content = string.Empty;
         }

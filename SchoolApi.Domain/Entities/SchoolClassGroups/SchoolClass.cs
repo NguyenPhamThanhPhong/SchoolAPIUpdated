@@ -30,7 +30,5 @@ namespace SchoolApi.Infrastructure.Entities.SchoolClassGroups
         public virtual List<Exam> exams { get; set; }
         public virtual List<SchoolClassSection> sections { get; set; }
 
-        public override bool hasOwnerShip() => creditLogs.Any();
-
     }
 }

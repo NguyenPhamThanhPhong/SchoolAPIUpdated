@@ -17,7 +17,46 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
         public Task<bool> UpdateStudent(StudentUpdateServiceRequest request);
 
     }
-    public class StudentService
+    public class StudentService : IStudentService
     {
+        public Task<IEnumerable<Student>> CreateMultipleStudents(IEnumerable<StudentCreateServiceRequest> requests)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Student> CreateSingleStudent(StudentCreateServiceRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteMultipleStudents(IEnumerable<string> studentIds)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteSingleStudent(string studentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MultipleEntitiesResponse<Student>> GetMultipleStudents(int page)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Student> GetStudentDetail(string studentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MultipleEntitiesResponse<Student>> SearchStudent(string searchTerm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateStudent(StudentUpdateServiceRequest request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

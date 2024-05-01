@@ -86,7 +86,6 @@ namespace SchoolApi.Infrastructure.Configurations
                 .WithMany(s => s.studentLogs)
                 .HasForeignKey(s => s.schoolMemberId);
 
-
             modelBuilder.Entity<SchoolClass>()
                 .HasOne(s => s.lecturerLog)
                 .WithOne(s => s.schoolClass)
@@ -96,7 +95,6 @@ namespace SchoolApi.Infrastructure.Configurations
                 .HasOne(s => s.schoolMember)
                 .WithMany(s => s.LecturerLogs)
                 .HasForeignKey(s => s.schoolMemberId);
-
 
             modelBuilder.Entity<SchoolmemberLog>()
                 .HasKey(s => new { s.schoolClassId, s.schoolMemberId });

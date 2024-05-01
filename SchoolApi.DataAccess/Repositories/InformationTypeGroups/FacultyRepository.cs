@@ -1,18 +1,15 @@
 ﻿using SchoolApi.Infrastructure.Configurations;
 using SchoolApi.Infrastructure.Repositories.Base;
 using SchoolApi.Infrastructure.Entities.InformationTypeGroups;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SchoolApi.Infrastructure.Repositories.InformationTypeGroups
 {
     public interface IFacultyRepository : IBaseRepository<Faculty>
     {
-        public Task<IEnumerable<Faculty>> GetRangeRelatedSubject(string facultyId);
-
+        public void RemoveRangeFromIds(IEnumerable<string> ids);
+        public Faculty? GetDetailFromId(string id);
+        public void RemoveSingleFromId(string facultyId);
     }
     public class FacultyRepository : BaseRepository<Faculty>,IFacultyRepository
     {
@@ -20,32 +17,46 @@ namespace SchoolApi.Infrastructure.Repositories.InformationTypeGroups
         {
 
         }
-        public Task RemoveRangeFromIds(IEnumerable<string> ids)
+        public void RemoveRangeFromIds(IEnumerable<string> ids)
         {
-            // use sql CASE to check if is Ownership of something
-            // if yes, set isDeleted to true
-            //else remove
-            // help me code here copilot
             var faculties = _context.Set<Faculty>()
                 .Where(x => ids.Contains(x.id))
                 .Select(x => new
                 {
                     faculty = x,
-                    hasOwnerShip= x.hasOwnerShip()
+                    hasOwnerShip= x.posts.Any() && x.subjects.Any()
                 }).ToList();
             foreach (var faculty in faculties)
             {
                 if (faculty.hasOwnerShip)
                     faculty.faculty.isDeleted = true;
                 else
-                    _context.Set<Faculty>().Remove(faculty.faculty);
-
+                    _context.Remove(faculty.faculty);
             }
         }
-
-        public Task<IEnumerable<Faculty>> GetRangeRelatedSubject(string facultyId)
+        public void RemoveSingleFromId(string id)
         {
-            throw new NotImplementedException();
+            var faculty = _context.Set<Faculty>()
+                .Where(x => x.id == id)
+                .Select(x => new
+                {
+                    faculty = x,
+                    hasOwnerShip = x.posts.Any() && x.subjects.Any()
+                }).FirstOrDefault();
+            if (faculty == null)
+                return ;
+            if(faculty.hasOwnerShip)
+                faculty.faculty.isDeleted = true;
+            else
+                _context.Remove(faculty.faculty);
         }
+        public Faculty? GetDetailFromId(string id)
+        {
+            var faculty = _context.Set<Faculty>()
+                .Include(x => x.subjects)
+                .Where(x => x.id == id).FirstOrDefault();
+            return faculty;
+        }
+
     }
 }

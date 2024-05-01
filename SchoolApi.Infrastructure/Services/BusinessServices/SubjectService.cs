@@ -19,7 +19,36 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
         public Task<bool> DeleteSubject(string subjectId);
         public Task<MultipleEntitiesResponse<Subject>> SearchSubject(string searchTerm);
     }
-    public class SubjectService
+    public class SubjectService : ISubjectService
     {
+        public Task<IEnumerable<Subject>> CreateMultipleSubjects(IEnumerable<SubjectCreateServiceRequest> requests)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Subject> CreateSingleSubject(SubjectCreateServiceRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteSubject(string subjectId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MultipleEntitiesResponse<Subject>> GetMultipleSubjects(int page)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Subject> GetSubjectDetail(string subjectId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MultipleEntitiesResponse<Subject>> SearchSubject(string searchTerm)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -7,18 +7,12 @@ namespace SchoolApi.Infrastructure.Entities.InformationTypeGroups
     {
         public string id { get; set; }
         public string name { get; set; }
-        public DateTime createdAt { get; set; }
 
-        public override bool hasOwnerShip()
-            => posts.Any() && subjects.Any();
-
-
-        public List<Subject> subjects { get; set; }
-        public List<Post> posts { get; set; }
+        public virtual List<Subject> subjects { get; set; }
+        public virtual List<Post> posts { get; set; }
         public Faculty()
         {
             name =string.Empty;
-            createdAt = DateTime.Now;
         }
 
     }

@@ -19,7 +19,6 @@ namespace SchoolApi.Infrastructure.Entities.UserGroups
         public string password { get; set; }
 
         public string role { get; set; }
-        public DateTime createdAt { get; set; }
 
         [Required]
         public UserProfile userProfile { get; set; }

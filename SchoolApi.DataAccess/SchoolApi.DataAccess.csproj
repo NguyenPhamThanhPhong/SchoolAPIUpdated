@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="RepositoryDTOs\Faculty\" />
     <Folder Include="RepositoryDTOs\Post\" />
   </ItemGroup>
 
