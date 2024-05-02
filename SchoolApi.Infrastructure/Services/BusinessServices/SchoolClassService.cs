@@ -24,7 +24,7 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
         Task<bool> DeleteSingle(string schoolClassId);
         Task<bool> DeleteMany(IEnumerable<string> schoolClassIds);
         Task<MultipleEntitiesResponse<SchoolClass>> Search(string searchTerm);
-        Task<SchoolClass> Update(SchoolClassUpdateServiceRequest request);
+        Task<SchoolClass?> Update(SchoolClassUpdateServiceRequest request);
     }
     public class SchoolClassService : ISchoolClassService
     {

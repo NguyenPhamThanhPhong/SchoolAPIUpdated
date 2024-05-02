@@ -36,8 +36,7 @@ namespace SchoolApi.API
             string connectionString = config.GetConnectionString("SchoolDatabaseConnection") ?? "";
             services.AddDbContext<SchoolDbContext>(
                 options => options.UseSqlServer(connectionString));
-
-            services.AddTransient<UnitOfWork>();
+            services.AddScoped<UnitOfWork>();
             return services;
         }
         public static IServiceCollection ConfigAuthentication(this IServiceCollection services, IConfiguration config)
@@ -133,34 +132,19 @@ namespace SchoolApi.API
                         Type = SecuritySchemeType.ApiKey,
                         Scheme = "Bearer"
                     });
-                //c.OperationFilter<SecurityRequirementsOperationFilter>();
-                //c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                //{
-                //    {
-                //        new OpenApiSecurityScheme
-                //        {
-                //            Reference = new OpenApiReference
-                //            {
-                //                Type = ReferenceType.SecurityScheme,
-                //                Id = "Bearer"
-                //            }
-                //        },
-                //        new string[] {}
-                //    }
-                //});
             });
             return services;
         }
         public static IServiceCollection ConfigBusinessServices(this IServiceCollection services)
         {
-            services.AddTransient<ISemesterService, SemesterService>();
-            services.AddTransient<IFacultyService, FacultyService>();
-            services.AddTransient<ISubjectService, SubjectService>();
-            services.AddTransient<IPostService, PostService>();
-            services.AddTransient<IStudentService, StudentService>();
-            services.AddTransient<ILecturerService, LecturerService>();
-            services.AddTransient<ILoginService, LoginService>();
-            services.AddTransient<ISchoolClassService, SchoolClassService>();
+            services.AddScoped<ISemesterService, SemesterService>();
+            services.AddScoped<IFacultyService, FacultyService>();
+            services.AddScoped<ISubjectService, SubjectService>();
+            services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<ILecturerService, LecturerService>();
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<ISchoolClassService, SchoolClassService>();
             return services;
         }
     }

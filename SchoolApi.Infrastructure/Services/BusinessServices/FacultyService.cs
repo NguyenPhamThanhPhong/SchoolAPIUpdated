@@ -33,7 +33,7 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
             _unitofWork = unitofWork;
         }
 
-        public Task<MultipleEntitiesResponse<Faculty>> CreateMultipleFaculties(IEnumerable<FacultyCreateServiceRequest> requests)
+        public virtual Task<MultipleEntitiesResponse<Faculty>> CreateMultipleFaculties(IEnumerable<FacultyCreateServiceRequest> requests)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
             }catch { return Task.FromResult(
                 new MultipleEntitiesResponse<Faculty>(false)); }
         }
-        public Task<Faculty?> CreateSingleFaculty(FacultyCreateServiceRequest request)
+        public virtual Task<Faculty?> CreateSingleFaculty(FacultyCreateServiceRequest request)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
             }
             catch { return Task.FromResult<Faculty?>(null); }
         }
-        public Task<bool> DeleteMultipleFaculties(IEnumerable<string> facultyIds)
+        public virtual Task<bool> DeleteMultipleFaculties(IEnumerable<string> facultyIds)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
             catch { return Task.FromResult(false); }
         }
 
-        public Task<bool> DeleteSingleFaculty(string facultyId)
+        public virtual Task<bool> DeleteSingleFaculty(string facultyId)
         {
             try
             {
@@ -78,14 +78,14 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
             catch { return Task.FromResult(false); }
         }
 
-        public Task<Faculty?> GetFacultyDetail(string facultyId)
+        public virtual Task<Faculty?> GetFacultyDetail(string facultyId)
         {
             var faculty =  _unitofWork.facultyRepository.GetDetailFromId(facultyId);
             _unitofWork.Save();
             return Task.FromResult(faculty);
         }
 
-        public  Task<MultipleEntitiesResponse<Faculty>> GetMultipleFaculties(BaseGetMultipleServiceRequest request)
+        public virtual Task<MultipleEntitiesResponse<Faculty>> GetMultipleFaculties(BaseGetMultipleServiceRequest request)
         {
             var faculties =  _unitofWork.facultyRepository.GetRange(s=>true)
                 .Skip(request.page * request.pageSize).Take(request.pageSize);
@@ -93,7 +93,7 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
             return Task.FromResult(new MultipleEntitiesResponse<Faculty>(true) { datas = faculties, TotalCount = count });
         }
 
-        public Task<MultipleEntitiesResponse<Faculty>> SearchFaculty(BaseSearchServiceRequest request)
+        public virtual Task<MultipleEntitiesResponse<Faculty>> SearchFaculty(BaseSearchServiceRequest request)
         {
             var cleanSearchTerm = Regex.Replace(request.searchTerm, "[^a-zA-Z0-9]", "");
             var faculties = _unitofWork.facultyRepository.GetRange(s => EF.Functions.Like(s.name.ToLower(), $"%{cleanSearchTerm}%"));
@@ -102,7 +102,7 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
             return Task.FromResult(new MultipleEntitiesResponse<Faculty>(true) 
                     { datas = faculties, TotalCount = count });
         }
-        public Task<Faculty?> UpdateFaculty(FacultyUpdateServiceRequest request)
+        public virtual Task<Faculty?> UpdateFaculty(FacultyUpdateServiceRequest request)
         {
             var faculty = _unitofWork.facultyRepository.GetSingle(s => s.id == request.id);
             if(faculty!=null)

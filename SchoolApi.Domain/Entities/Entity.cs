@@ -10,5 +10,10 @@ namespace SchoolApi.Domain.Entities
     {
         public bool isDeleted { get; set; }
         public DateTime createdAt { get; set; }
+        public Entity()
+        {
+            isDeleted = false;
+            createdAt = DateTime.Now;
+        }
     }
 }

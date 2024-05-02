@@ -1,5 +1,4 @@
-﻿using SchoolApi.Domain.Entities.StudentSchoolClass;
-using SchoolApi.Infrastructure.Entities.SchoolClassGroups;
+﻿using SchoolApi.Infrastructure.Entities.SchoolClassGroups;
 using SchoolApi.Infrastructure.Entities.UserGroups;
 using System.ComponentModel.DataAnnotations;
 

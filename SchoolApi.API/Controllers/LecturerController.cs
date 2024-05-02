@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolApi.API.DTOS.SchoolMember;
+using SchoolApi.Infrastructure.ServiceDTOS.Base;
 using SchoolApi.Infrastructure.ServiceDTOS.SchoolMemberServiceDTOs;
 using SchoolApi.Infrastructure.Services.BusinessServices;
 
@@ -35,9 +36,9 @@ namespace SchoolApi.API.Controllers
             return Ok(lecturers);
         }
         [HttpGet("multiple/{page}")]
-        public async Task<IActionResult> GetMultipleLecturers(int page)
+        public async Task<IActionResult> GetMultipleLecturers([FromQuery] int page, [FromQuery] int pageSize)
         {
-            var lecturers = await _lecturerService.GetMultipleLecturers(page);
+            var lecturers = await _lecturerService.GetMultipleLecturers(new BaseGetMultipleServiceRequest(page,pageSize));
             return Ok(lecturers);
         }
         [HttpGet("{lecturerId}")]
@@ -47,9 +48,9 @@ namespace SchoolApi.API.Controllers
             return Ok(lecturer);
         }
         [HttpGet("search")]
-        public async Task<IActionResult> SearchLecturer([FromQuery] string searchTerm)
+        public async Task<IActionResult> SearchLecturer([FromQuery] string searchTerm, [FromQuery]int page, [FromQuery]int pageSize)
         {
-            var lecturers = await _lecturerService.SearchLecturer(searchTerm);
+            var lecturers = await _lecturerService.SearchLecturer(new BaseSearchServiceRequest(searchTerm,page,pageSize) );
             return Ok(lecturers);
         }
         [HttpDelete("{lecturerId}")]
@@ -70,7 +71,7 @@ namespace SchoolApi.API.Controllers
         {
             var serviceRequest = _mapper.Map<LecturerUpdateServiceRequest>(request);
             var isUpdated = await _lecturerService.UpdateLecturer(serviceRequest);
-            return isUpdated ? Ok() : NotFound("not found lecturer");
+            return isUpdated==null ? Ok() : NotFound("not found lecturer");
         }
 
 

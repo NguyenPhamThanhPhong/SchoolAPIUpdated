@@ -1,5 +1,4 @@
-﻿using SchoolApi.Domain.Entities.StudentSchoolClass;
-using SchoolApi.Infrastructure.Entities.StudentSchoolClass;
+﻿using SchoolApi.Infrastructure.Entities.StudentSchoolClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;

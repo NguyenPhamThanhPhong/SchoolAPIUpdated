@@ -1,5 +1,6 @@
 ﻿namespace SchoolApi.API.DTOS.SchoolMember
 {
+#pragma warning disable CS8618
     public class StudentUpdateRequest
     {
         public string id { get; set; }

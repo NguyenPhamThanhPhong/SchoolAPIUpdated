@@ -6,6 +6,7 @@ namespace SchoolApi.Infrastructure.ServiceDTOS.SchoolClassServiceDTOs
 {
     public class SchoolClassUpdateServiceRequest
     {
+#pragma warning disable CS8618  
         public string id { get; set; }
         public string name { get; set; }
         public string roomName { get; set; }
@@ -17,8 +18,5 @@ namespace SchoolApi.Infrastructure.ServiceDTOS.SchoolClassServiceDTOs
         public Subject  subject { get; set; }
         public Schedule schedule { get; set; }
         public LecturerLog lecturerLog { get; set; }
-        public List<StudentLog> studentLogs { get; set; }
-        public List<Exam> exams { get; set; }
-        public List<SchoolClassSection> sections { get; set; }
     }
 }

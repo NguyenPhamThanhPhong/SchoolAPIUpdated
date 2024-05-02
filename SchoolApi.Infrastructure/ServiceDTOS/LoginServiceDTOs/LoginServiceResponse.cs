@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SchoolApi.Infrastructure.ServiceDTOS.LoginServiceDTOs
 {
+#pragma warning disable CS8618
     public class LoginServiceResponse
     {
         public string refreshToken { get; set; }

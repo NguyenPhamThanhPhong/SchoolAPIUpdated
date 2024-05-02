@@ -2,6 +2,7 @@
 {
     public class UserProfileRequest
     {
+#pragma warning disable CS8618
         public string name { get; set; }
         public string? avatarUrl { get; set; }
         public IFormFile? file { get; set; }
