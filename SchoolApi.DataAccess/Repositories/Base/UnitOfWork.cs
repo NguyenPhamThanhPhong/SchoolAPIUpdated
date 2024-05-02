@@ -23,6 +23,7 @@ namespace SchoolApi.Infrastructure.Repositories.Base
         private IUserRepository     _userRepository     ;
         private IStudentRepository  _studentRepository  ;
         private ILecturerRepository _lecturerRepository ;
+        private ISchoolClassRepository _schoolClassRepository;
 
 
         public IFacultyRepository facultyRepository
@@ -40,6 +41,9 @@ namespace SchoolApi.Infrastructure.Repositories.Base
             get => _studentRepository ??= new StudentRepository(_context); }
         public ILecturerRepository lecturerRepository {
             get => _lecturerRepository ??= new LecturerRepository(_context); }
+        public ISchoolClassRepository schoolClassRepository{
+               get => _schoolClassRepository ??= new SchoolClassRepository(_context);
+        }
 
         public int Save()
         {

@@ -8,11 +8,13 @@ namespace SchoolApi.Infrastructure.ServiceDTOS.SemesterServiceDTOs
 {
     public class SemesterUpdateServiceRequest
     {
+        public string id { get; set; }
         public string name { get; set; }
         public DateTime? startDate { get; set; }
         public DateTime? endDate { get; set; }
         public SemesterUpdateServiceRequest()
         {
+            id = string.Empty;
             name = string.Empty;
         }
     }

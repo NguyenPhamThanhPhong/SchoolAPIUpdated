@@ -9,6 +9,7 @@ using SchoolApi.Infrastructure.Entities.UserGroups;
 namespace SchoolApi.Infrastructure.Entities.StudentSchoolClass
 {
     //[PrimaryKey(nameof(schoolMemberId), nameof(schoolClassId))]
+#pragma warning disable CS8618
     public abstract class SchoolmemberLog : Entity
     {
         [Column(Order =1)]

@@ -1,4 +1,5 @@
-﻿using SchoolApi.Infrastructure.Configurations;
+﻿using SchoolApi.Domain.Entities;
+using SchoolApi.Infrastructure.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SchoolApi.Infrastructure.Repositories.Base
 {
-    public interface IBaseRepository<TEntity> where TEntity : class
+    public interface IBaseRepository<TEntity> where TEntity : Entity
     {
         IEnumerable<TEntity> GetRange(Expression<Func<TEntity,bool>> predicate);
         TEntity? GetSingle(Expression<Func<TEntity, bool>> predicate);
@@ -20,7 +21,7 @@ namespace SchoolApi.Infrastructure.Repositories.Base
         void RemoveRange(IEnumerable<TEntity> entities);
         int GetCountDefault();
     }
-    public class BaseRepository<TEntity>: IBaseRepository<TEntity> where TEntity : class
+    public class BaseRepository<TEntity>: IBaseRepository<TEntity> where TEntity : Entity
     {
         protected readonly SchoolDbContext _context;
 
@@ -31,8 +32,7 @@ namespace SchoolApi.Infrastructure.Repositories.Base
 
         public IEnumerable<TEntity> GetRange(Expression<Func<TEntity, bool>> predicate)
         {
-            return _context.Set<TEntity>().Where(predicate);
-
+            return _context.Set<TEntity>().Where(predicate).OrderByDescending(e => e.createdAt);
         }
         public TEntity? GetSingle(Expression<Func<TEntity, bool>> predicate)
         {

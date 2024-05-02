@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolApi.API.DTOS.Semester;
+using SchoolApi.Infrastructure.ServiceDTOS.Base;
 using SchoolApi.Infrastructure.ServiceDTOS.SemesterServiceDTOs;
 using SchoolApi.Infrastructure.Services.BusinessServices;
 
@@ -35,22 +35,27 @@ namespace SchoolApi.API.Controllers
         [HttpGet("{semesterId}")]
         public async Task<IActionResult> GetSemesterDetail(string semesterId)
         {
-            throw new NotImplementedException();
+            var semester = await _semesterService.GetSemesterDetail(semesterId);
+            return Ok(semester);
         }
-        [HttpGet("multiple/{page}")]
-        public async Task<IActionResult> GetSemesters(int page)
+        [HttpGet("multiple")]
+        public async Task<IActionResult> GetSemesters([FromQuery]int page, [FromQuery]int pageSize)
         {
-            throw new NotImplementedException();
+            var semesters = await _semesterService
+                .GetMultipleSemesters(new BaseGetMultipleServiceRequest(page,pageSize));
+            return Ok(semesters);
         }
         [HttpDelete("{semesterId}")]
         public async Task<IActionResult> DeleteSemester(string semesterId)
         {
-            throw new NotImplementedException();
+            var isDeleted = await _semesterService.DeleteSingleSemester(semesterId);
+            return isDeleted ? Ok() : NotFound("not found semester");
         }
         [HttpPost("search")]
         public async Task<IActionResult> SearchSemester(string searchTerm)
         {
-            throw new NotImplementedException();
+            var semesters = await _semesterService.SearchSemester(new BaseSearchServiceRequest(searchTerm));
+            return Ok(semesters);
         }
     }
 }

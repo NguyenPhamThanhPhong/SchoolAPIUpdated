@@ -9,9 +9,12 @@ namespace SchoolApi.Infrastructure.ServiceDTOS
 #pragma warning disable CS8618
     public class MultipleEntitiesResponse<TEntity> where TEntity : class
     {
-        public bool Success { get; set; }
-        public string Message { get; set; } 
+        public bool IsSuccess { get; set; }
         public int TotalCount { get; set; }
         public IEnumerable<TEntity> datas { get; set; }
+        public MultipleEntitiesResponse(bool IsSuccess)
+        {
+            this.IsSuccess = IsSuccess;
+        }
     }
 }

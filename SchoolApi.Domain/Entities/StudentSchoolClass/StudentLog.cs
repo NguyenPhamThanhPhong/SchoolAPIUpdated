@@ -1,14 +1,12 @@
-﻿using SchoolApi.Infrastructure.Entities.SchoolClassGroups;
+﻿using SchoolApi.Domain.Entities.StudentSchoolClass;
+using SchoolApi.Infrastructure.Entities.SchoolClassGroups;
 using SchoolApi.Infrastructure.Entities.UserGroups;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SchoolApi.Infrastructure.Entities.StudentSchoolClass
 {
+#pragma warning disable CS8618
     public class StudentLog : SchoolmemberLog
     {
         public float progress { get; set; }
@@ -18,7 +16,5 @@ namespace SchoolApi.Infrastructure.Entities.StudentSchoolClass
         public float average { get; set; }
         [Required]
         public virtual Student schoolMember { get; set; }
-        [Required]
-        public virtual SchoolClass schoolClass { get; set;}
     }
 }

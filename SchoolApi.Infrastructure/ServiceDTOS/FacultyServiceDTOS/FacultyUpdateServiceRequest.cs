@@ -1,5 +1,6 @@
 ﻿namespace SchoolApi.Infrastructure.ServiceDTOS.FacultyServiceDTOs
 {
+#pragma warning disable CS8618
     public class FacultyUpdateServiceRequest
     {
         public string id { get; set; }

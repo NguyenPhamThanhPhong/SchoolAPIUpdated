@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolApi.API.DTOS.Post;
 using SchoolApi.Infrastructure.Entities.InformationTypeGroups;
+using SchoolApi.Infrastructure.ServiceDTOS.Base;
 using SchoolApi.Infrastructure.ServiceDTOS.PostServiceDTOs;
 using SchoolApi.Infrastructure.Services.BusinessServices;
 
@@ -21,21 +22,23 @@ namespace SchoolApi.API.Controllers
             _mapper = mapper;
         }
         [HttpGet("search")]
-        public async Task<IActionResult> SearchPost([FromQuery] string searchTerm)
+        public async Task<IActionResult> SearchPost([FromQuery] string searchTerm, [FromQuery] int page, [FromQuery]int pageSize)
         {
-            var posts = await _postService.SearchPost(searchTerm);
+            var posts = await _postService.SearchPost(
+                new BaseSearchServiceRequest(searchTerm,page,pageSize));
             return Ok(posts);
         }
         [HttpGet("{postId}")]
         public async Task<IActionResult> GetPostDetail(string postId)
         {
-            Post post = await _postService.GetPostDetail(postId);
+            Post? post = await _postService.GetPostDetail(postId);
             return Ok(post);
         }
-        [HttpGet("multiple/{page}")]
-        public async Task<IActionResult> GetMultiplePosts(int page)
+        [HttpGet("multiple")]
+        public async Task<IActionResult> GetMultiplePosts([FromQuery] int page, [FromQuery] int pageSize)
         {
-            var posts = await _postService.GetMultiplePosts(page);
+            var posts = await _postService.GetMultiplePosts(
+                new BaseGetMultipleServiceRequest(page,pageSize));
             return Ok(posts);
         }
 
@@ -59,6 +62,11 @@ namespace SchoolApi.API.Controllers
             var isDeleted = await _postService.DeleteSinglePost(postId);
             return isDeleted ? Ok() : NotFound("not found post");
         }
-
+        [HttpDelete("multiple")]
+        public async Task<IActionResult> DeleteMultiplePosts(IEnumerable<string> postIds)
+        {
+            var isDeleted = await _postService.DeleteMultiplePosts(postIds);
+            return isDeleted ? Ok() : NotFound("not found post");
+        }
     }
 }

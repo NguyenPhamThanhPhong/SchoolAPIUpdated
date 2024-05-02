@@ -1,4 +1,5 @@
-﻿using SchoolApi.Infrastructure.Entities.StudentSchoolClass;
+﻿using SchoolApi.Domain.Entities.StudentSchoolClass;
+using SchoolApi.Infrastructure.Entities.StudentSchoolClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SchoolApi.Infrastructure.Entities.UserGroups
 {
+#pragma warning disable CS8618
     public class Student : User
     {
         public virtual List<CreditLog> creditLogs { get; set; }
