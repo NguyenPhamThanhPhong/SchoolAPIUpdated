@@ -8,6 +8,7 @@ using SchoolApi.Infrastructure.Repositories.Base;
 using SchoolApi.Infrastructure.Services.AuthenticationServices;
 using SchoolApi.Infrastructure.Services.AzureBlobServices;
 using SchoolApi.Infrastructure.Services.BusinessServices;
+using SchoolApi.Infrastructure.Services.HelperServices;
 using SchoolApi.Infrastructure.Services.SMTPServices;
 using System.Text;
 
@@ -24,6 +25,7 @@ namespace SchoolApi.API
             services.ConfigSwagger();
             services.ConfigDbContext(config);
             services.ConfigAuthentication(config);
+            services.ConfigAzureBlob(config);
             services.ConfigBusinessServices();
 
             //services.ConfigValidators();
@@ -137,6 +139,7 @@ namespace SchoolApi.API
         }
         public static IServiceCollection ConfigBusinessServices(this IServiceCollection services)
         {
+            services.AddSingleton<ServiceHelper>();
             services.AddScoped<ISemesterService, SemesterService>();
             services.AddScoped<IFacultyService, FacultyService>();
             services.AddScoped<ISubjectService, SubjectService>();

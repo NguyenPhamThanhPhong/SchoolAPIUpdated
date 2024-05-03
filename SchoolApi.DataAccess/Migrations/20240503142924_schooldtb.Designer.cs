@@ -12,7 +12,7 @@ using SchoolApi.Infrastructure.Configurations;
 namespace SchoolApi.DataAccess.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20240430164351_schooldtb")]
+    [Migration("20240503142924_schooldtb")]
     partial class schooldtb
     {
         /// <inheritdoc />
