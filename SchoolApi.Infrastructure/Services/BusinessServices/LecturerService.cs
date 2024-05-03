@@ -14,13 +14,13 @@ using SchoolApi.Infrastructure.Services.AzureBlobServices;
 using SchoolApi.Infrastructure.ServiceDTOS.Base;
 using SchoolApi.Infrastructure.Helper;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace SchoolApi.Infrastructure.Services.BusinessServices
 {
     public interface ILecturerService
     {
         Task<Lecturer?> CreateSingleLecturer(LecturerCreateServiceRequest request);
-        Task<MultipleEntitiesResponse<Lecturer>> CreateMultipleLecturers(IEnumerable<LecturerCreateServiceRequest> requests);
         Task<Lecturer?> GetLecturerDetail(string lecturerId);
         Task<MultipleEntitiesResponse<Lecturer>> GetMultipleLecturers(BaseGetMultipleServiceRequest request);
         Task<bool> DeleteSingleLecturer(string lecturerId);
@@ -41,18 +41,6 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
             _azureBlobHandler = azureBlobHandler;
         }
 
-        public virtual Task<MultipleEntitiesResponse<Lecturer>> CreateMultipleLecturers(IEnumerable<LecturerCreateServiceRequest> requests)
-        {
-            try
-            {
-                var lecturers = _mapper.Map<IEnumerable<Lecturer>>(requests);
-                _unitOfWork.lecturerRepository.AddRange(lecturers);
-                _unitOfWork.Save();
-                return Task.FromResult(new MultipleEntitiesResponse<Lecturer>(true) { datas = lecturers });
-            }
-            catch{return Task.FromResult(new MultipleEntitiesResponse<Lecturer>(false));}
-        }
-
         public virtual Task<Lecturer?> CreateSingleLecturer(LecturerCreateServiceRequest request)
         {
             try
@@ -71,7 +59,9 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
         {
             try
             {
-                _unitOfWork.lecturerRepository.RemoveRangeFromIds(lecturerIds);
+                IEnumerable<string?> avatarUrls = _unitOfWork.lecturerRepository.RemoveRangeFromIds(lecturerIds);
+                IEnumerable<string> avatarUrlsNotNull = avatarUrls.Where(s => s != null).Select(s => s!);
+                _azureBlobHandler.DeleteMultipleBlobs(avatarUrlsNotNull).Wait();
                 _unitOfWork.Save();
                 return Task.FromResult(true);
             }
@@ -129,16 +119,17 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
         {
             try
             {
-                var currentLecturer = _unitOfWork.lecturerRepository.GetSingle(s => s.id == request.id);
+                var currentLecturer = _unitOfWork.context.Set<Lecturer>()
+                    .Include(s => s.userProfile).FirstOrDefault();
                 if (currentLecturer == null) 
                     return Task.FromResult<Lecturer?>(null);
-                var updatedLecturer = _mapper.Map(request, currentLecturer);
+                _mapper.Map(request, currentLecturer);
                 if (request.file != null)
-                    updatedLecturer.userProfile.avatarUrl = _azureBlobHandler.UploadSingleBlob(request.file).Result??"";
-
-                _unitOfWork.lecturerRepository.Update(updatedLecturer);
+                    currentLecturer.userProfile.avatarUrl = _azureBlobHandler
+                        .UploadSingleBlob(request.file).Result ?? "";
+                Console.WriteLine(JsonSerializer.Serialize(currentLecturer));
                 _unitOfWork.Save();
-                return Task.FromResult<Lecturer?>(updatedLecturer);
+                return Task.FromResult<Lecturer?>(currentLecturer);
             }catch { return Task.FromResult<Lecturer?>(null);}
         }
     }

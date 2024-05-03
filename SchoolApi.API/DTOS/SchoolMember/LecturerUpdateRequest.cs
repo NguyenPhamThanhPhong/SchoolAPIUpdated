@@ -15,7 +15,7 @@ namespace SchoolApi.API.DTOS.SchoolMember
         public string password { get; set; }
         [Required]
         public UserProfileRequest userProfile { get; set; }
+        public IEnumerable<LecturerLogRequest> lecturerLogs { get; set; }
         public IFormFile? file { get; set; }
-        public List<LecturerLog> lecturerLogs { get; set; }
     }
 }

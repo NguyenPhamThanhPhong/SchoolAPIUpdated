@@ -43,6 +43,7 @@ namespace SchoolApi.Infrastructure.Configurations
 
             try
             {
+
                 modelBuilder.Entity<SchoolClassRegistration>()
                     .HasMany(s => s.schoolClasses)
                     .WithMany()
@@ -63,6 +64,20 @@ namespace SchoolApi.Infrastructure.Configurations
             {
                 Console.WriteLine(e.Message);
             }
+        }
+        private void configUser(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.userProfile)
+                .WithOne()
+                .HasForeignKey<UserProfile>(u => u.userId);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.scheduleTables)
+                .WithOne()
+                .HasForeignKey();
+            // student - creditlog 1-n defined in studentlog
+            //lecturer - lecturerlog 1-n defined in lecturerlog
         }
         private void configSchoolClass(ModelBuilder modelBuilder)
         {

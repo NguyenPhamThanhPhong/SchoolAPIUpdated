@@ -7,14 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SchoolApi.Infrastructure.Entities.StudentSchoolClass;
 
 namespace SchoolApi.Infrastructure.Repositories.UserGroups
 {
     public interface ILecturerRepository : IBaseRepository<Lecturer>
     {
         Lecturer? GetLecturerDetail(string lecturerId);
-        public void RemoveRangeFromIds(IEnumerable<string> lecturerIds);
+        public IEnumerable<string?> RemoveRangeFromIds(IEnumerable<string> lecturerIds);
         public Lecturer? RemoveSingleFromId(string facultyId);
+        public IEnumerable<LecturerLog> GetLecturerLogs(string lecturerId);
     }
     internal class LecturerRepository : BaseRepository<Lecturer>, ILecturerRepository
     {
@@ -30,13 +32,21 @@ namespace SchoolApi.Infrastructure.Repositories.UserGroups
                     .FirstOrDefault(x=>x.id == lecturerId);
         }
 
-        public void RemoveRangeFromIds(IEnumerable<string> lecturerIds)
+        public IEnumerable<LecturerLog> GetLecturerLogs(string id)
+        {
+            return _context.Set<LecturerLog>()
+                .Include(x => x.schoolClass)
+                .Where(x => x.schoolMemberId == id).ToList();
+        }
+
+        public IEnumerable<string?> RemoveRangeFromIds(IEnumerable<string> lecturerIds)
         {
             var lecturers = _context.Set<Lecturer>()
                 .Where(x => lecturerIds.Contains(x.id))
                 .Select(x => new
                 {
                     lecturer = x,
+                    avatarUrl = x.userProfile.avatarUrl,
                     hasOwnerShip = x.LecturerLogs.Any()
                 }).ToList();
             foreach (var lecturer in lecturers)
@@ -46,12 +56,13 @@ namespace SchoolApi.Infrastructure.Repositories.UserGroups
                 else
                     _context.Remove(lecturer.lecturer);
             }
+            return lecturers.Select(x => x.avatarUrl);
         }
 
-        public Lecturer? RemoveSingleFromId(string facultyId)
+        public Lecturer? RemoveSingleFromId(string lecturerId)
         {
             var lecturer = _context.Set<Lecturer>()
-                .Where(x => x.id == facultyId)
+                .Where(x => x.id == lecturerId)
                 .Select(x => new
                 {
                     lecturer = x,

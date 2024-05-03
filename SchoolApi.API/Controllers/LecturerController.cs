@@ -22,18 +22,11 @@ namespace SchoolApi.API.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateLecturer(LecturerCreateRequest request)
+        public async Task<IActionResult> CreateLecturer([FromForm]LecturerCreateRequest request)
         {
             var serviceRequest = _mapper.Map<LecturerCreateServiceRequest>(request);
             var lecturer = await _lecturerService.CreateSingleLecturer(serviceRequest);
             return Ok(lecturer);
-        }
-        [HttpPost("create-multiple")]
-        public async Task<IActionResult> CreateMultipleLecturers(List<LecturerCreateRequest> request)
-        {
-            var serviceRequest = _mapper.Map<List<LecturerCreateServiceRequest>>(request);
-            var lecturers = await _lecturerService.CreateMultipleLecturers(serviceRequest);
-            return Ok(lecturers);
         }
         [HttpGet("multiple/{page}")]
         public async Task<IActionResult> GetMultipleLecturers([FromQuery] int page, [FromQuery] int pageSize)
@@ -70,8 +63,8 @@ namespace SchoolApi.API.Controllers
         public async Task<IActionResult> UpdateLecturer([FromBody] LecturerUpdateRequest request)
         {
             var serviceRequest = _mapper.Map<LecturerUpdateServiceRequest>(request);
-            var isUpdated = await _lecturerService.UpdateLecturer(serviceRequest);
-            return isUpdated==null ? Ok() : NotFound("not found lecturer");
+            var lecturer = await _lecturerService.UpdateLecturer(serviceRequest);
+            return lecturer == null ? NotFound("not found lecturer") : Ok(lecturer);
         }
 
 

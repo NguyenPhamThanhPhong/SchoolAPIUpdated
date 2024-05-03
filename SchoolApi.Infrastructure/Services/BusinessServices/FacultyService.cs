@@ -108,7 +108,6 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
             if(faculty!=null)
             {
                 _mapper.Map(request, faculty);
-                _unitofWork.facultyRepository.Update(faculty);
                 _unitofWork.Save();
             }
             return Task.FromResult(faculty);

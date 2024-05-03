@@ -19,7 +19,8 @@ namespace SchoolApi.Infrastructure.ServiceDTOS.SchoolMemberServiceDTOs
         public LecturerCreateServiceRequest()
         {
             id = Guid.NewGuid().ToString();
-            userProfile!.userId = id;
+            userProfile = new UserProfile();
+            userProfile.userId = id;
         }
     }
 }

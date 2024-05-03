@@ -8,11 +8,11 @@ namespace SchoolApi.Infrastructure.Repositories.Base
 
     public class UnitOfWork : IDisposable
     {
-        private readonly SchoolDbContext _context;
+        public SchoolDbContext context;
 #pragma warning disable CS8618
         public UnitOfWork(SchoolDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 #pragma warning restore CS8618
 
@@ -28,35 +28,35 @@ namespace SchoolApi.Infrastructure.Repositories.Base
 
         public IFacultyRepository facultyRepository
         {
-            get => _facultyRepository ??= new FacultyRepository(_context);}
+            get => _facultyRepository ??= new FacultyRepository(context);}
         public IPostRepository postRepository { 
-            get => _postRepository ??= new PostRepository(_context); }
+            get => _postRepository ??= new PostRepository(context); }
         public ISemesterRepository semesterRepository {
-            get => _semesterRepository ??= new SemesterRepository(_context); }
+            get => _semesterRepository ??= new SemesterRepository(context); }
         public ISubjectRepository subjectRepository {
-            get => _subjectRepository ??= new SubjectRepository(_context);}
+            get => _subjectRepository ??= new SubjectRepository(context);}
         public IUserRepository userRepository { 
-            get => _userRepository ??= new UserRepository(_context); }
+            get => _userRepository ??= new UserRepository(context); }
         public IStudentRepository studentRepository {
-            get => _studentRepository ??= new StudentRepository(_context); }
+            get => _studentRepository ??= new StudentRepository(context); }
         public ILecturerRepository lecturerRepository {
-            get => _lecturerRepository ??= new LecturerRepository(_context); }
+            get => _lecturerRepository ??= new LecturerRepository(context); }
         public ISchoolClassRepository schoolClassRepository{
-               get => _schoolClassRepository ??= new SchoolClassRepository(_context);
+               get => _schoolClassRepository ??= new SchoolClassRepository(context);
         }
 
         public int Save()
         {
-            return _context.SaveChanges();
+            return context.SaveChanges();
         }
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            return _context.SaveChangesAsync(cancellationToken);
+            return context.SaveChangesAsync(cancellationToken);
         }
 
         public void Dispose()
         {
-            _context.Dispose();
+            context.Dispose();
         }
     }
 }

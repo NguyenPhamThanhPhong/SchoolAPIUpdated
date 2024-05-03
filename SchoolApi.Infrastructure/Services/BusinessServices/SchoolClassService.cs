@@ -125,7 +125,6 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
                 if (currentSchoolClass == null)
                     return Task.FromResult<SchoolClass?>(null);
                 _mapper.Map(request, currentSchoolClass);
-                _unitOfWork.schoolClassRepository.Update(currentSchoolClass);
                 _unitOfWork.Save();
                 return Task.FromResult<SchoolClass?>(currentSchoolClass);
             }

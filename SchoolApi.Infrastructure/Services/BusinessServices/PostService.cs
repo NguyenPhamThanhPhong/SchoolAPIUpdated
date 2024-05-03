@@ -124,16 +124,17 @@ namespace SchoolApi.Infrastructure.Services.BusinessServices
 
         public Task<Post?> UpdatePost(PostUpdateServiceRequest serviceRequest)
         {
-            var post = _unitofWork.postRepository.GetSingle(s => s.id == serviceRequest.id);
+            var post = _unitofWork.context.Set<Post>()
+                .Include(post => post.faculties).FirstOrDefault(s => s.id == serviceRequest.id);
+            var faculties = _unitofWork.facultyRepository.GetRange(
+                s => serviceRequest.faculyIds.Contains(s.id)).ToList();
             if(post == null)
                 return Task.FromResult<Post?>(null);
-            var currentFileDict = post.fileUrlsDict;
 
-            //assigning new values
-            post.title = serviceRequest.title;
-            post.content = serviceRequest.content;
+            _mapper.Map(serviceRequest, post);
+            var currentFileDict = post.fileUrlsDict;
+            post.faculties = faculties;
             post.fileUrlsDict = _serviceHelper.GenerateFileDictFromRequest(currentFileDict, serviceRequest.keepUrls, serviceRequest.files);
-            // done assigning
             _unitofWork.Save();
             return Task.FromResult<Post?>(post);
         }
