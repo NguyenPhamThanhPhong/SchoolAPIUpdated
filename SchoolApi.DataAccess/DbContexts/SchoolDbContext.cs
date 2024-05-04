@@ -65,6 +65,16 @@ namespace SchoolApi.Infrastructure.Configurations
                 Console.WriteLine(e.Message);
             }
         }
+        private void configFaculty(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Faculty>()
+                .HasMany(f => f.subjects)
+                .WithOne();
+
+            modelBuilder.Entity<Faculty>()
+                .HasMany(f => f.posts)
+                .WithMany();
+        }
         private void configUser(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()

@@ -12,6 +12,7 @@ namespace SchoolApi.Infrastructure.Entities.InformationTypeGroups
         public string content { get; set; }
         public string fileUrlsString { get; set; }
 
+
         [NotMapped]
         public Dictionary<string, string> fileUrlsDict
         {
